@@ -10,7 +10,7 @@ resource "aws_security_group" "demo-cluster" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags {
+  tags = {
     Name = "terraform-eks-demo"
   }
 }
@@ -34,4 +34,3 @@ resource "aws_security_group_rule" "demo-cluster-ingress-workstation-https" {
   to_port           = 443
   type              = "ingress"
 }
-

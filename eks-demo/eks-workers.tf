@@ -1,7 +1,7 @@
 data "aws_ami" "eks-worker" {
   filter {
     name   = "name"
-    values = ["amazon-eks-node-1*"]
+    values = ["amazon-eks-node-${aws_eks_cluster.demo.version}-v*"]
   }
 
   most_recent = true
@@ -41,7 +41,7 @@ resource "aws_autoscaling_group" "demo" {
   max_size             = 2
   min_size             = 1
   name                 = "terraform-eks-demo"
-  vpc_zone_identifier  = ["${module.vpc.public_subnets}"]
+  vpc_zone_identifier  = flatten(["${module.vpc.public_subnets}"])
 
   tag {
     key                 = "Name"
